@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bet Slip Upload</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Full-page background */
+        body {
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .form-container label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-container select,
+        .form-container input,
+        .form-container textarea,
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .form-container select,
+        .form-container textarea {
+            background: #333;
+            color: white;
+        }
+        .form-container input[type="date"] {
+            background: #333; /* Black background */
+            color: white; /* White text */
+        }
+
+        /* File Upload Styling */
+        .file-upload-wrapper {
+            position: relative;
+            width: 100%;
+            text-align: center;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            display: none; /* Hide the default file input */
+        }
+
+        .file-upload-wrapper label {
+            display: inline-block;
+            background: #ff4500;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .file-upload-wrapper label:hover {
+            background: #ff6347;
+        }
+
+        /* Custom "No file chosen" Text */
+        .file-upload-wrapper .file-name {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        /* Submit Button Styling */
+        .form-container button {
+            background: #ff4500;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .form-container button:hover {
+            background: #ff6347;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 15px;
+            }
+
+            .form-container h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Upload Your Bet Slip</h1>
+        <form id="upload-form" action="http://127.0.0.1:5000/upload" method="POST" enctype="multipart/form-data">
+            
+            <!-- Select Name -->
+            <label for="name">Select Your Name:</label>
+            <select id="name" name="name" required>
+                <option value="simu">Simu</option>
+                <option value="arneet">Arneet</option>
+                <option value="arsh">Arsh</option>
+                <option value="molli">Molli</option>
+                <option value="jashan">Jashan</option>
+                <option value="zach">Zach</option>
+                <option value="dhillon">Dhillon</option>
+                <option value="gobind">Gobind</option>
+            </select>
+
+            <!-- Date Input -->
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <!-- Bet Description -->
+            <label for="description">Bet Description:</label>
+            <textarea id="description" name="description" rows="4" placeholder="Enter bet description here..." required></textarea>
+
+            <!-- File Upload -->
+            <div class="file-upload-wrapper">
+                <input type="file" id="file" name="file" accept="image/*" required>
+                <label for="file">Choose File</label>
+                <span class="file-name" id="file-name">No file chosen</span>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Show the chosen file name
+        const fileInput = document.getElementById('file');
+        const fileNameSpan = document.getElementById('file-name');
+
+        fileInput.addEventListener('change', () => {
+            fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
+        });
+    </script>
+</body>
+</html>
